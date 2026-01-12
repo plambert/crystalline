@@ -22,9 +22,9 @@ class Crystalline::Workspace
       if @projects.size > 0
         LSP::Log.info do
           <<-LOG
-          "[workspace] Found projects:
-          #{@projects.map(&.root_uri.decoded_path).join('\n')}
-          LOG
+            "[workspace] Found projects:
+            #{@projects.map(&.root_uri.decoded_path).join('\n')}
+            LOG
         end
       end
     end
@@ -221,18 +221,18 @@ class Crystalline::Workspace
     if doc
       contents << "----------"
       contents << <<-MARKDOWN
-      #{doc}
-      MARKDOWN
+        #{doc}
+        MARKDOWN
     end
   end
 
   private def code_markdown(str : String?, *, language = "") : String
     if str
       <<-MARKDOWN
-      ```#{language}
-      #{str}
-      ```
-      MARKDOWN
+        ```#{language}
+        #{str}
+        ```
+        MARKDOWN
     else
       ""
     end

@@ -71,10 +71,10 @@ module Crystal
         end
       else
         notes << <<-NOTE
-            If you're trying to require a shard:
-            - Did you remember to run `shards install`?
-            - Did you make sure you're running the compiler in the same directory as your shard.yml?
-            NOTE
+          If you're trying to require a shard:
+          - Did you remember to run `shards install`?
+          - Did you make sure you're running the compiler in the same directory as your shard.yml?
+          NOTE
       end
 
       node.raise "#{message}\n\n#{notes.join("\n")}"
