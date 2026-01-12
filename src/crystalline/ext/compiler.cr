@@ -193,9 +193,9 @@ module Crystal
     getter program : Crystal::Program
 
     def visit(node : MacroExpression)
-      previous_def.tap {
+      previous_def.tap do
         node.expanded = @last
-      }
+      end
     end
   end
 

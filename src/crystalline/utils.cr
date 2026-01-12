@@ -31,18 +31,18 @@ module Crystalline::Utils
   end
 
   def self.locations_from_union(union : Crystal::Union, nodes : Array(Crystal::ASTNode), *, locations = [] of {Crystal::Location, Crystal::Location}) : Array({Crystal::Location, Crystal::Location})
-    union.types.each { |type|
+    union.types.each do |type|
       if type.is_a? Crystal::Path
-        locations_from_path(type, nodes).try { |locs|
+        locations_from_path(type, nodes).try do |locs|
           locations.concat locs
-        }
+        end
       elsif type.is_a? Crystal::Union
         self.locations_from_union(type, nodes, locations: locations)
       elsif (location = type.location)
         end_location = type.end_location || location
         locations << {location, end_location}
       end
-    }
+    end
     locations
   end
 
@@ -83,7 +83,7 @@ module Crystalline::Utils
 
   # Format a method definition or macro.
   def self.format_def(d : Crystal::Def | Crystal::Macro, *, short = false)
-    String.build { |str|
+    String.build do |str|
       unless short
         str << d.visibility.to_s.downcase
         str << ' '
@@ -122,7 +122,7 @@ module Crystalline::Utils
         str << " forall "
         free_vars.join(str, ", ")
       end
-    }
+    end
   rescue e
     # LSP::Log.error(exception: e) { e.to_s }
     d.to_s

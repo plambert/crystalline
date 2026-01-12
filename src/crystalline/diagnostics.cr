@@ -33,7 +33,7 @@ class Crystalline::Diagnostics
 
     related_information = [] of LSP::DiagnosticRelatedInformation
 
-    error_stack.each_with_index { |err, i|
+    error_stack.each_with_index do |err, i|
       bottom_error = i == error_stack.size - 1
       if err.filename.is_a? Crystal::VirtualFile && (expanded_source = err.filename.as(Crystal::VirtualFile).expanded_location)
         line = expanded_source.line_number || 1
@@ -61,14 +61,14 @@ class Crystalline::Diagnostics
           filename: err.true_filename,
         )
       end
-    }
+    end
   end
 
   def publish(server : LSP::Server)
-    @diagnostics.each { |key, value|
+    @diagnostics.each do |key, value|
       server.try &.send(LSP::PublishDiagnosticsNotification.new(
         params: LSP::PublishDiagnosticsParams.new(uri: key, diagnostics: value),
       ))
-    }
+    end
   end
 end
