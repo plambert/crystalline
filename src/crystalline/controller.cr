@@ -61,19 +61,19 @@ class Crystalline::Controller
       end
     when LSP::HoverRequest
       @compiler_lock.synchronize do
-        return nil unless @pending_requests.includes? message.id
+        return unless @pending_requests.includes? message.id
         file_uri = URI.parse message.params.text_document.uri
         workspace.hover(@server, file_uri, message.params.position)
       end
     when LSP::DefinitionRequest
       @compiler_lock.synchronize do
-        return nil unless @pending_requests.includes? message.id
+        return unless @pending_requests.includes? message.id
         file_uri = URI.parse message.params.text_document.uri
         workspace.definitions(@server, file_uri, message.params.position)
       end
     when LSP::CompletionRequest
       @compiler_lock.synchronize do
-        return nil unless @pending_requests.includes? message.id
+        return unless @pending_requests.includes? message.id
         file_uri = URI.parse message.params.text_document.uri
         workspace.completion(@server, file_uri, message.params.position, message.params.context.try &.trigger_character)
       end
