@@ -25,7 +25,7 @@ module Crystalline::Analysis
         Crystal::Compiler::Source.new(file_uri.decoded_path, file.gets_to_end),
       ]
       file.close
-      self.compile(server, sources, lib_path: lib_path, file_overrides: file_overrides, ignore_diagnostics: ignore_diagnostics, wants_doc: wants_doc, top_level: top_level, compiler_flags: compiler_flags)
+      compile(server, sources, lib_path: lib_path, file_overrides: file_overrides, ignore_diagnostics: ignore_diagnostics, wants_doc: wants_doc, top_level: top_level, compiler_flags: compiler_flags)
     end
   end
 
@@ -200,7 +200,7 @@ module Crystalline::Analysis
       if type.responds_to? :instance_type
         extends_self = type.instance_type == parent
       end
-      self.all_defs(parent, accumulator: accumulator, nesting: extends_self ? nesting : nesting + 1)
+      all_defs(parent, accumulator: accumulator, nesting: extends_self ? nesting : nesting + 1)
     end
 
     accumulator
@@ -221,7 +221,7 @@ module Crystalline::Analysis
     end
 
     type.parents.try &.each do |parent|
-      self.all_macros(parent, accumulator: accumulator, nesting: nesting + 1)
+      all_macros(parent, accumulator: accumulator, nesting: nesting + 1)
     end
 
     accumulator

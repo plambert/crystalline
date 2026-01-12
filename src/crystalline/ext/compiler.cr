@@ -134,7 +134,7 @@ module Crystal
           RecursiveStructChecker.new(self).run
         end
 
-        {result, self.error_stack.to_a}
+        {result, error_stack.to_a}
       rescue e : Crystal::CodeError
         program.error_stack << e
         # Returns a partially typed ast.
@@ -203,7 +203,7 @@ module Crystal
     # Adds functionality to get the CRYSTAL_PATH value, but without the default
     # library directory.
     def self.default_path_without_lib
-      parts = self.default_path.split(Process::PATH_DELIMITER)
+      parts = default_path.split(Process::PATH_DELIMITER)
       parts.select(&.!=(DEFAULT_LIB_PATH)).join(Process::PATH_DELIMITER)
     end
   end

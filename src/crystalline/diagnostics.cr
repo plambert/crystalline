@@ -8,7 +8,7 @@ class Crystalline::Diagnostics
 
   def append(diagnostic : LSP::Diagnostic)
     key = "file://#{diagnostic.source}"
-    self.init_value(key)
+    init_value(key)
     @diagnostics[key] << diagnostic
   end
 
@@ -44,7 +44,7 @@ class Crystalline::Diagnostics
       end
 
       if bottom_error
-        self.append(LSP::Diagnostic.new(
+        append(LSP::Diagnostic.new(
           line: line,
           column: column,
           size: err.size || 0,

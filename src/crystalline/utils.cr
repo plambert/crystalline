@@ -19,7 +19,7 @@ module Crystalline::Utils
   end
 
   def self.locations_from_path(path : Crystal::Path, nodes : Array(Crystal::ASTNode)) : Array({Crystal::Location, Crystal::Location})?
-    target = self.resolve_path(path, nodes)
+    target = resolve_path(path, nodes)
     target.as?(Crystal::Const | Crystal::Type).try &.locations.try &.map do |location|
       end_location = Crystal::Location.new(
         location.filename,
@@ -37,7 +37,7 @@ module Crystalline::Utils
           locations.concat locs
         end
       elsif type.is_a? Crystal::Union
-        self.locations_from_union(type, nodes, locations: locations)
+        locations_from_union(type, nodes, locations: locations)
       elsif (location = type.location)
         end_location = type.end_location || location
         locations << {location, end_location}
