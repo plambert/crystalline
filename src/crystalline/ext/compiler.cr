@@ -121,7 +121,7 @@ module Crystal
         # give an error otherwise
         processor.check_non_nilable_class_vars_without_initializers
 
-        result = @progress_tracker.stage("Semantic (main)") do
+        @progress_tracker.stage("Semantic (main)") do
           visit_main(node, process_finished_hooks: true, cleanup: cleanup)
         end
 
@@ -134,7 +134,7 @@ module Crystal
           RecursiveStructChecker.new(self).run
         end
 
-        {result, error_stack.to_a}
+        node
       rescue e : Crystal::CodeError
         program.error_stack << e
         # Returns a partially typed ast.
@@ -143,8 +143,6 @@ module Crystal
         # Returns a partially typed ast.
         node
       end
-
-      node
     end
   end
 
