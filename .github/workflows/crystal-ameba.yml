@@ -2,8 +2,6 @@ name: Crystal Ameba
 
 on:
   push:
-    paths:
-      - "**/*.cr"
   pull_request:
 
 permissions:
