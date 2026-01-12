@@ -5,9 +5,6 @@ Style/ParenthesesAroundCondition:
   ExcludeTernary: false
   AllowSafeAssignment: true
 
-Documentation/DocumentationAdmonition:
-  Enabled: false
-
 Naming/BlockParameterName:
   Enabled: false
 
