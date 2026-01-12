@@ -90,8 +90,6 @@ class Crystalline::Controller
           end
         end
       end
-    else
-      nil
     end
   rescue e : Crystal::TypeException
     LSP::Log.warn(exception: e) { e.to_s }
