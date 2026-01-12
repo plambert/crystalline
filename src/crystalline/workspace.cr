@@ -23,7 +23,7 @@ class Crystalline::Workspace
       if @projects.size > 0
         LSP::Log.info do
           <<-LOG
-            "[workspace] Found projects:
+            [workspace] Found projects:
             #{@projects.map(&.root_uri.decoded_path).join('\n')}
             LOG
         end

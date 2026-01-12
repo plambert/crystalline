@@ -20,8 +20,7 @@ class Crystalline::ResultCache
     return false unless exists?(entry)
     invalidation_time = @cache[entry][1]
     if since
-      # ameba:disable Lint/NotNil!
-      !invalidation_time || invalidation_time.not_nil! > since
+      !invalidation_time || invalidation_time > since
     else
       !invalidation_time.nil?
     end
