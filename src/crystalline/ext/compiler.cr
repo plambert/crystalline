@@ -28,13 +28,13 @@ module Crystal
       end
 
       location = node.location
-      filename = node.string
+      node_filename = node.string
       relative_to = location.try &.original_filename
 
       # Remember that the program depends on this require
-      @program.record_require(filename, relative_to)
+      @program.record_require(node_filename, relative_to)
 
-      filenames = @program.find_in_path(filename, relative_to)
+      filenames = @program.find_in_path(node_filename, relative_to)
       if filenames
         nodes = Array(ASTNode).new(filenames.size)
         filenames.each do |filename|

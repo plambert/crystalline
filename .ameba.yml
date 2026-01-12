@@ -19,15 +19,6 @@ Lint/RedundantStringCoercion:
   Enabled: true
   Severity: Warning
 
-Lint/ShadowingOuterLocalVar:
-  Description:
-    Disallows the usage of the same name as outer local variables for block
-    or proc arguments
-  Excluded:
-    - src/crystalline/ext/compiler.cr
-  Enabled: true
-  Severity: Warning
-
 Naming/QueryBoolMethods:
   Description: Reports boolean properties without the `?` suffix
   Enabled: false
