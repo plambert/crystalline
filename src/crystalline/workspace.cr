@@ -18,6 +18,7 @@ class Crystalline::Workspace
 
   def initialize(server : LSP::Server, root_uri : String?)
     if (@root_uri = root_uri.try &->URI.parse(String))
+      # ameba:disable Lint/NotNil!
       @projects = Project.find_in_workspace_root @root_uri.not_nil!
       if @projects.size > 0
         LSP::Log.info do
@@ -136,6 +137,7 @@ class Crystalline::Workspace
       )
     else
       # The file is not a project dependency.
+      # ameba:disable Lint/NotNil!
       target = file_uri.not_nil!
       progress = Progress.new(
         token: "workspace/compile",
@@ -196,6 +198,7 @@ class Crystalline::Workspace
         if result
           if project.try(&.entry_point?)
             # Store the project dependencies.
+            # ameba:disable Lint/NotNil!
             project.not_nil!.dependencies = result.program.requires
           end
           "Completed successfully."
@@ -324,6 +327,7 @@ class Crystalline::Workspace
       definitions.locations.try &.map do |start_loc, end_loc|
         if node.is_a? Crystal::Path || node.is_a? Crystal::Require
           target_uri = "file://#{start_loc.original_filename}"
+          # ameba:disable Lint/NotNil!
           origin_location = node.location.not_nil!
           origin_end_location = definitions.node.end_location || Crystal::Location.new(
             file_uri.decoded_path,
@@ -452,6 +456,7 @@ class Crystalline::Workspace
 
         # We are looking for methods…
         if node_type.responds_to? :defs
+          # ameba:disable Lint/NotNil!
           Analysis.all_defs(node_type.not_nil!).each do |def_name, definition, owner_type, nesting|
             owner_prefix = "*Inherited from: #{owner_type.name}*\n\n" if owner_type.responds_to? :name && owner_type != n.type
             owner_prefix ||= ""
